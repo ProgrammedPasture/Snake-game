@@ -18,11 +18,26 @@ class Snake:
 #creating the snake
     def create_snake(self):
         for positions in STARTING_POSITIONS:
-            amber = Turtle("square")
-            amber.penup()
-            amber.color("white")
-            amber.goto(positions)
-            self.segments.append(amber)
+            self.add_segment(positions)
+
+    def add_segment(self, positions):
+        amber = Turtle("square")
+        amber.penup()
+        amber.color("white")
+        amber.goto(positions)
+        self.segments.append(amber)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000,1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
+#extending the snake when it scores a point
+    def extend_snake(self):
+        self.add_segment(self.segments[-1].position())
+
 
 #Snake ability to move
     def move(self):
